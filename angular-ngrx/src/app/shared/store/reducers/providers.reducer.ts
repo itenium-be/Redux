@@ -28,17 +28,13 @@ const INITIAL_STATE: ProvidersState = {
   loaded: false,
 };
 
-export function reducer(
-  state: ProvidersState = INITIAL_STATE,
-  action: ProviderActions.Actions
-): ProvidersState {
+export function reducer(state: ProvidersState = INITIAL_STATE, action: ProviderActions.Actions): ProvidersState {
   switch (action.type) {
     case ProviderActions.LOAD_PROVIDERS: {
       return Object.assign({}, state, { loading: true });
     }
     case ProviderActions.LOAD_PROVIDERS_SUCCESS: {
-      const payload = (<ProviderActions.LoadProvidersSuccessAction>action)
-        .payload;
+      const payload = (<ProviderActions.LoadProvidersSuccessAction>action).payload;
 
       return Object.assign({}, state, {
         providers: payload,
