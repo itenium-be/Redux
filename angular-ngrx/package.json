@@ -22,6 +22,8 @@
     "@angular/platform-browser": "13.3.0",
     "@angular/platform-browser-dynamic": "13.3.0",
     "@angular/router": "13.3.0",
+    "@datorama/akita": "^7.1.1",
+    "@datorama/akita-ngdevtools": "^7.0.0",
     "@ngrx/store": "^13.0.2",
     "core-js": "^2.5.4",
     "file-saver": "^2.0.0",
@@ -48,10 +50,10 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "protractor": "~7.0.0",
+    "sass": "^1.34.0",
     "ts-node": "~5.0.1",
     "tslib": "^2.0.0",
     "tslint": "~6.1.0",
-    "typescript": "4.6.2",
-    "sass": "^1.34.0"
+    "typescript": "4.6.2"
   }
 }
