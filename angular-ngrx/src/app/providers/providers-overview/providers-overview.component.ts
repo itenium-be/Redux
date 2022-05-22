@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { ProvidersSandbox } from './providers-overview.sandbox';
 import { Provider,} from '../../shared/models/provider';
 import { initialFilters } from '../../shared/store/reducers/providers.reducer';
@@ -12,14 +11,13 @@ import { ProvidersService } from '../../shared/services/providers.service';
   templateUrl: "./providers-overview.component.html",
   providers: [ProvidersSandbox],
 })
-export class ProvidersOverviewComponent implements OnInit, OnDestroy {
+export class ProvidersOverviewComponent implements OnInit {
   filtersForm: FormGroup;
-  isLoading$ = this.sandbox.IsLoading();
-  private subscriptions: Subscription[] = [];
+  providers$ = this.sandbox.GetProviders();
 
   constructor(
     private sandbox: ProvidersSandbox,
-    private router: Router,
+    public router: Router,
     private providerService: ProvidersService,
     private fb: FormBuilder
   ) {}
@@ -33,23 +31,11 @@ export class ProvidersOverviewComponent implements OnInit, OnDestroy {
     const initial = initialFilters();
     this.filtersForm = this.fb.group({
       search: initial.search,
-      filters: this.fb.group({
-        status: [initial.filters.status, null, { updateOn: "change" }],
-      }),
+      active: initial.active,
     });
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach((sub) => sub.unsubscribe());
-  }
-
-  onRowClicked(rowData: Provider) {
+  onRowClicked(rowData: Provider): void {
     this.router.navigate(["providers", rowData.code]);
-  }
-
-  addProvider() {
-    this.router.navigate(["providers/new"], {
-      queryParamsHandling: "preserve",
-    });
   }
 }

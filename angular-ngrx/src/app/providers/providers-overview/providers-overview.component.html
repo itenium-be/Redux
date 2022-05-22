@@ -1,1 +1,24 @@
-<h1>Providers</h1>
+<h1>
+  Cloud Providers
+  <button type="button" class="btn btn-primary" (click)="router.navigate(['providers/new'])" style="float: right">
+    Add Provider
+  </button>
+</h1>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Code</th>
+      <th scope="col">Name</th>
+      <th scope="col">Active</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let provider of providers$ | async">
+      <td><a href="javascript:void(0)" (click)="router.navigate(['providers', provider.code])">{{ provider.code }}</a></td>
+      <td>{{ provider.name }}</td>
+      <td>{{ provider.active ? "Yes" : "No" }}</td>
+    </tr>
+  </tbody>
+</table>

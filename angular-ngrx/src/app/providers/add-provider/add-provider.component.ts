@@ -23,12 +23,13 @@ export class AddProviderComponent implements OnInit {
     this.frm = this.fb.group({
       name: null,
       code: null,
-      status: 'active',
+      active: true,
     });
   }
 
   ok(): void {
-    this.sandbox.addProvider(this.frm.getRawValue());
+    this.sandbox.addProvider(this.frm.value);
+    this.cancel();
   }
 
   cancel(): void {

@@ -1,51 +1,51 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, Subject, throwError } from 'rxjs';
-import { Provider } from '../models/provider';
-import { share, take, catchError, takeUntil } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
-import { GlobalState } from '../store/store';
-import * as ProvidersActions from '../store/actions/providers.action';
-import { OnDestroy } from '@angular/core';
+import { Injectable } from "@angular/core";
+import { EMPTY, from, Observable, throwError } from "rxjs";
+import { Provider } from "../models/provider";
+import { take, catchError, map } from "rxjs/operators";
+import { Store } from "@ngrx/store";
+import { GlobalState } from "../store/store";
+import * as ProvidersActions from "../store/actions/providers.action";
+
+const data = [
+  { code: "AWS", name: "Amazon Web Services", active: true },
+  { code: "AZ", name: "Microsoft Azure", active: true },
+  { code: "GCP", name: "Google Cloud Platform", active: true },
+];
+
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: "root",
 })
-export class ProvidersService implements OnDestroy {
+export class ProvidersService {
+  constructor(private readonly appState$: Store<GlobalState>) {}
 
-    private cancelLoadProviders = new Subject<void>();
+  get(): Observable<Provider[]> {
+    return from([[...data]]);
+  }
 
-    constructor(private http: HttpClient, private readonly appState$: Store<GlobalState>) {}
+  getProvider(ref: string): Observable<Provider> {
+    return this.get().pipe(map(providers => providers.find(p => p.code === ref)));
+  }
 
-    ngOnDestroy(): void {
-      this.cancelLoadProviders.next();
-      this.cancelLoadProviders.complete();
-    }
+  addProvider(provider: Provider): Observable<void> {
+    data.push(provider);
+    return EMPTY;
+  }
 
-    get(): Observable<Provider[]> {
-        return this.http.get<Provider[]>(`/providers`);
-    }
-
-    getProvider(providerReference: string): Observable<Provider> {
-        return this.http.get<Provider>(`/providers/${encodeURIComponent(providerReference)}`);
-    }
-
-    addProvider(provider: Provider): Observable<any> {
-        return this.http.post(`/providers`, provider)
-            .pipe(share());
-    }
-
-    public loadProviders() {
-      this.cancelLoadProviders.next();
-      this.appState$.dispatch(new ProvidersActions.LoadProvidersAction);
-      this.get().pipe(
-          takeUntil(this.cancelLoadProviders),
-          take(1),
-          catchError(error => {
-              this.appState$.dispatch(new ProvidersActions.LoadProvidersFailAction(error));
-              return throwError(error);
-          })).subscribe((response: Provider[]) => {
-              this.appState$.dispatch(new ProvidersActions.LoadProvidersSuccessAction(response));
-          });
-    }
+  public loadProviders(): void {
+    this.appState$.dispatch(new ProvidersActions.LoadProvidersAction());
+    this.get()
+      .pipe(
+        take(1),
+        catchError(error => {
+          this.appState$.dispatch(new ProvidersActions.LoadProvidersFailAction(error));
+          return throwError(error);
+        })
+      )
+      .subscribe((response: Provider[]) => {
+        this.appState$.dispatch(
+          new ProvidersActions.LoadProvidersSuccessAction(response)
+        );
+      });
+  }
 }

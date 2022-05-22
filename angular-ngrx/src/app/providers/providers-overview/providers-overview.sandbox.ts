@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 import * as store from "../../shared/store/store";
 import * as ProvidersActions from "../../shared/store/actions/providers.action";
 import { getProviders, getProvidersPaging, getProvidersSorting, getProvidersFilters, getProvidersLoading } from "../../shared/store/store";
-import { Provider, IProvidersFilter } from "../../shared/models/provider";
+import { Provider, ProvidersFilter } from "../../shared/models/provider";
 import { IPaging, ISorting } from "../../shared/models/interfaces";
 
 @Injectable()
@@ -35,11 +35,11 @@ export class ProvidersSandbox {
     this.appState$.dispatch(new ProvidersActions.SetSortingAction(sorting));
   }
 
-  public GetFilters(): Observable<IProvidersFilter> {
+  public GetFilters(): Observable<ProvidersFilter> {
     return this.appState$.pipe(select(getProvidersFilters));
   }
 
-  public UpdateFilters(filters: IProvidersFilter) {
+  public UpdateFilters(filters: ProvidersFilter) {
     this.appState$.dispatch(new ProvidersActions.SetFiltersAction(filters));
   }
 

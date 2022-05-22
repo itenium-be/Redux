@@ -7,15 +7,15 @@ import { Provider } from '../../shared/models/provider';
 @Component({
   selector: 'app-provider-details',
   templateUrl: './provider-details.component.html',
-  styleUrls: ['./provider-details.component.scss'],
   providers: [ProviderDetailsSandbox]
 })
 export class ProviderDetailsComponent implements OnInit, OnDestroy {
-
-  constructor(private sandbox: ProviderDetailsSandbox, private location: Location) { }
+  constructor(
+    private sandbox: ProviderDetailsSandbox,
+    private location: Location
+  ) { }
 
   public providerDetails: Provider;
-
   private subscriptions: Array<Subscription> = [];
 
   ngOnInit(): void {

@@ -8,18 +8,9 @@ const providersRoutes: Routes = [
   {
     path: '',
     children: [
-      {
-        path: '',
-        component: ProvidersOverviewComponent,
-      },
-      {
-        path: 'new',
-        component: AddProviderComponent,
-      },
-      {
-        path: ':providerReference',
-        component: ProviderDetailsComponent,
-      }
+      { path: '', component: ProvidersOverviewComponent },
+      { path: 'new', component: AddProviderComponent },
+      { path: ':ref', component: ProviderDetailsComponent }
     ]
   }
 ];

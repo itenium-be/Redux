@@ -18,12 +18,10 @@ export class ProviderDetailsSandbox {
     private route: ActivatedRoute
   ) {}
 
-  providerDetails$: Observable<Provider> = this.appState$.pipe(
-    select(getProviderDetailsData)
-  );
+  providerDetails$: Observable<Provider> = this.appState$.pipe(select(getProviderDetailsData));
 
   LoadProviderDetails(): void {
-    const providerReference = this.route.snapshot.params["providerReference"];
+    const providerReference = this.route.snapshot.params["ref"];
     this.appState$.dispatch(new DetailLoadingAction());
     this.providerService
       .getProvider(providerReference)

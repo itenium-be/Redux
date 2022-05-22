@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Provider, IProvidersFilter } from '../../models/provider';
+import { Provider, ProvidersFilter } from "../../models/provider";
 import { IPaging, ISorting } from '../../models/interfaces';
 
 /* ACTION DEFINITIONS */
@@ -28,7 +28,7 @@ export class LoadProvidersFailAction implements Action {
 
 export class SetFiltersAction implements Action {
   readonly type = SET_FILTERS;
-  constructor(public payload: IProvidersFilter) { }
+  constructor(public payload: ProvidersFilter) {}
 }
 
 export class SetSortingAction implements Action {
