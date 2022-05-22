@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ProvidersSandbox } from './providers-overview.sandbox';
+import { select, Store } from '@ngrx/store';
 import { Provider,} from '../provider';
-import { initialFilters } from '../providers.reducer';
 import { ProvidersService } from '../providers.service';
+import { GlobalState } from '../../shared/store';
 
 @Component({
   selector: "app-providers-overview",
   templateUrl: "./providers-overview.component.html",
-  providers: [ProvidersSandbox],
 })
 export class ProvidersOverviewComponent implements OnInit {
   filtersForm: FormGroup;
-  providers$ = this.sandbox.GetProviders();
+  providers$ = this.appState$.pipe(select((state: GlobalState) => state.providers.providers));
 
   constructor(
-    private sandbox: ProvidersSandbox,
+    private appState$: Store<GlobalState>,
     public router: Router,
     private providerService: ProvidersService,
     private fb: FormBuilder
@@ -28,10 +27,9 @@ export class ProvidersOverviewComponent implements OnInit {
   }
 
   private initForm() {
-    const initial = initialFilters();
     this.filtersForm = this.fb.group({
-      search: initial.search,
-      active: initial.active,
+      search: null,
+      active: null,
     });
   }
 
