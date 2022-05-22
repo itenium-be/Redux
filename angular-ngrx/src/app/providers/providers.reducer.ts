@@ -1,6 +1,6 @@
-import * as ProviderActions from "../actions/providers.action";
-import { Provider, ProvidersFilter } from "../../models/provider";
-import { IPaging, ISorting } from "../../models/interfaces";
+import * as ProviderActions from "./providers.action";
+import { Provider, ProvidersFilter } from "./provider";
+import { IPaging, ISorting } from "../shared/interfaces";
 
 const _initialFilters: ProvidersFilter = { search: "", active: true };
 const _initialPaging: IPaging = { page: 1, pageSize: 10 };

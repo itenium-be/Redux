@@ -1,7 +1,7 @@
 import { ActionReducerMap } from '@ngrx/store';
 import { createSelector } from 'reselect';
 
-import * as providers from './reducers/providers.reducer';
+import * as providers from '../providers/providers.reducer';
 
 
 /** GLOBAL Store State */

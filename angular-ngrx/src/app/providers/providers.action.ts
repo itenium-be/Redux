@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Provider, ProvidersFilter } from "../../models/provider";
-import { IPaging, ISorting } from '../../models/interfaces';
+import { Provider, ProvidersFilter } from "./provider";
+import { IPaging, ISorting } from '../shared/interfaces';
 
 /* ACTION DEFINITIONS */
 export const LOAD_PROVIDERS = '[Providers] Load Providers';

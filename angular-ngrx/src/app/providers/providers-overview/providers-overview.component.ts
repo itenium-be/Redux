@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProvidersSandbox } from './providers-overview.sandbox';
-import { Provider,} from '../../shared/models/provider';
-import { initialFilters } from '../../shared/store/reducers/providers.reducer';
-import { ProvidersService } from '../../shared/services/providers.service';
+import { Provider,} from '../provider';
+import { initialFilters } from '../providers.reducer';
+import { ProvidersService } from '../providers.service';
 
 @Component({
   selector: "app-providers-overview",

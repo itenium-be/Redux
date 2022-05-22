@@ -3,9 +3,9 @@ import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { EMPTY, from, Observable, throwError } from "rxjs";
 import { take, catchError, map } from "rxjs/operators";
-import { Provider } from "../models/provider";
-import { GlobalState } from "../store/store";
-import * as ProvidersActions from "../store/actions/providers.action";
+import { Provider } from "./provider";
+import { GlobalState } from "../shared/store";
+import * as ProvidersActions from "./providers.action";
 
 const data = [
   { code: "AWS", name: "Amazon Web Services", active: true },

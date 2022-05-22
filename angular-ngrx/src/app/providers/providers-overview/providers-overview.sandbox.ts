@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Store, select } from "@ngrx/store";
 import { Observable } from "rxjs";
-import * as store from "../../shared/store/store";
-import * as ProvidersActions from "../../shared/store/actions/providers.action";
-import { getProviders, getProvidersPaging, getProvidersSorting, getProvidersFilters, getProvidersLoading } from "../../shared/store/store";
-import { Provider, ProvidersFilter } from "../../shared/models/provider";
-import { IPaging, ISorting } from "../../shared/models/interfaces";
+import * as store from "../../shared/store";
+import * as ProvidersActions from "../providers.action";
+import { getProviders, getProvidersPaging, getProvidersSorting, getProvidersFilters, getProvidersLoading } from "../../shared/store";
+import { Provider, ProvidersFilter } from "../provider";
+import { IPaging, ISorting } from "../../shared/interfaces";
 
 @Injectable()
 export class ProvidersSandbox {

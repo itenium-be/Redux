@@ -1,8 +1,8 @@
-import { GlobalState } from './../../shared/store/store';
+import { GlobalState } from '../../shared/store';
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
-import { Provider } from '../../shared/models/provider';
+import { Provider } from '../provider';
 import { select, Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 

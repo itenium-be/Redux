@@ -1,5 +1,5 @@
-import { LoadProvidersAction } from "src/app/shared/store/actions/providers.action";
-import { reducer } from "../src/app/shared/store/reducers/providers.reducer";
+import { LoadProvidersAction } from "src/app/providers/providers.action";
+import { reducer } from "../src/app/providers/providers.reducer";
 
 describe('Providers Reducer', () => {
   it('LOAD_PROVIDERS sets loading to true', () => {

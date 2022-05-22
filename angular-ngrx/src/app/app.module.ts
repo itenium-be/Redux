@@ -10,7 +10,7 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { reducers } from './shared/store/store';
+import { reducers } from './shared/store';
 import { environment } from '../environments/environment';
 
 
