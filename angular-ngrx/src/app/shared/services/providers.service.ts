@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
-import { EMPTY, from, Observable, throwError } from "rxjs";
-import { Provider } from "../models/provider";
-import { take, catchError, map } from "rxjs/operators";
+import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
+import { EMPTY, from, Observable, throwError } from "rxjs";
+import { take, catchError, map } from "rxjs/operators";
+import { Provider } from "../models/provider";
 import { GlobalState } from "../store/store";
 import * as ProvidersActions from "../store/actions/providers.action";
 
@@ -17,7 +18,10 @@ const data = [
   providedIn: "root",
 })
 export class ProvidersService {
-  constructor(private readonly appState$: Store<GlobalState>) {}
+  constructor(
+    private readonly appState$: Store<GlobalState>,
+    private router: Router,
+  ) {}
 
   get(): Observable<Provider[]> {
     return from([[...data]]);
@@ -28,7 +32,9 @@ export class ProvidersService {
   }
 
   addProvider(provider: Provider): Observable<void> {
+    this.appState$.dispatch(new ProvidersActions.AddedAction(provider));
     data.push(provider);
+    this.router.navigate(["providers"]);
     return EMPTY;
   }
 

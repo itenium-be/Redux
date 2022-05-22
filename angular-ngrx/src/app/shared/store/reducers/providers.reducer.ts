@@ -89,6 +89,13 @@ export function reducer(state: ProvidersState = INITIAL_STATE, action: ProviderA
       });
     }
 
+    case ProviderActions.ADDED:
+      // ATTN: Do not use state.providers.push()!!
+      return {
+        ...state,
+        providers: state.providers.concat([action.payload]),
+      };
+
     default: {
       return state;
     }
