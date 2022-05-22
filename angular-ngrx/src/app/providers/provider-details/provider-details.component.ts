@@ -1,37 +1,32 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ProviderDetailsSandbox } from './provider-details.sandbox';
+import { GlobalState } from './../../shared/store/store';
+import { Component } from '@angular/core';
 import { Location } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Provider } from '../../shared/models/provider';
+import { select, Store } from '@ngrx/store';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-provider-details',
-  templateUrl: './provider-details.component.html',
-  providers: [ProviderDetailsSandbox]
+  selector: "app-provider-details",
+  templateUrl: "./provider-details.component.html",
+  providers: [],
 })
-export class ProviderDetailsComponent implements OnInit, OnDestroy {
+export class ProviderDetailsComponent {
   constructor(
-    private sandbox: ProviderDetailsSandbox,
-    private location: Location
-  ) { }
+    private appState$: Store<GlobalState>,
+    private location: Location,
+    private route: ActivatedRoute
+  ) {}
 
-  public providerDetails: Provider;
-  private subscriptions: Array<Subscription> = [];
+  provider$: Observable<Provider> = this.appState$.pipe(select(
+    (state: GlobalState) => state.providers.providers.find(p => p.code === this.route.snapshot.params['ref'])
+  ));
 
-  ngOnInit(): void {
-    this.sandbox.LoadProviderDetails();
-
-    this.subscriptions.push(
-      this.sandbox.providerDetails$.subscribe(x => {
-        this.providerDetails = x;
-      })
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
-    this.subscriptions = [];
-  }
+  // TODO: RXJS Training:
+  // --> Fetch data when not yet available
+  // --> Fallback when code does not exist
+  // --> Combine with Routing instead of Snapshot
+  // --> This is becoming a handful, could be put in a Selectors or Queries file
 
   backClicked() {
     this.location.back();

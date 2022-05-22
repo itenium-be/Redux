@@ -7,6 +7,7 @@ import { IPaging, ISorting } from '../../models/interfaces';
 export const LOAD_PROVIDERS = '[Providers] Load Providers';
 export const LOAD_PROVIDERS_SUCCESS = '[Providers] Load Providers Success';
 export const LOAD_PROVIDERS_FAIL = '[Providers] Load Providers Fail';
+export const ADDED = "[Provider] Added";
 
 export const SET_FILTERS = '[Providers] Set Filters';
 export const SET_SORTING = '[Providers] Set Sorting';
@@ -45,11 +46,17 @@ export class ResetPageAction implements Action {
   readonly type = RESET_PAGE;
 }
 
-export type Actions
-  = LoadProvidersAction
+export class AddedAction implements Action {
+  readonly type = ADDED;
+  constructor(public payload: Provider) {}
+}
+
+export type Actions =
+  | LoadProvidersAction
   | LoadProvidersSuccessAction
   | LoadProvidersFailAction
   | SetFiltersAction
   | SetSortingAction
   | SetPagingAction
-  | ResetPageAction;
+  | ResetPageAction
+  | AddedAction;

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import * as store from "../../shared/store/store";
-import * as providerActions from "../../shared/store/actions/providerDetails.action";
+import * as providerActions from "../../shared/store/actions/providers.action";
 import { ProvidersService } from "../../shared/services/providers.service";
 import { Router } from "@angular/router";
 import { Provider } from "../../shared/models/provider";
@@ -26,8 +26,6 @@ export class AddProvidersSandbox {
       code: providerData.code,
       name: providerData.name,
     };
-
-    this.appState$.dispatch(new providerActions.StartAddingAction(provider));
 
     this.providerService.addProvider(provider).subscribe(() => {
       this.appState$.dispatch(new providerActions.AddedAction(provider));
