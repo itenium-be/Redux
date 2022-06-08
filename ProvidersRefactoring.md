@@ -1,5 +1,8 @@
 ## Providers ChangeLog
 
+Copy the pptx to another location before doing checkouts.
+
+
 ```
 git checkout 0.Original
 ```
@@ -49,7 +52,6 @@ Sus Files:
 
 - `providers.reducer.ts`
 - `add-provider.sandbox.ts`
-- `providers.reducer.ts`
 
 
 ```
